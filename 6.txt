@@ -1,7 +1,0 @@
-AB 1
-AC 12
-BD 5
-BE 16
-ED 23
-CE 7
-CF 4
