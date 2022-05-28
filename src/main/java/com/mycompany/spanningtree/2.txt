@@ -1,0 +1,6 @@
+AB 10
+AC 8
+BC 6
+BD 5
+DE 1
+CE 1
