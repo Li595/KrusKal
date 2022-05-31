@@ -4,28 +4,35 @@ import java.awt.FileDialog;
 import java.awt.Frame;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.*;
 
-public class Input {
-          
+
+public class Input {  
+    
+    public static char getCharFromString(String str, int index)
+    {
+        return str.charAt(index);
+    }
     
     public static void InputFromConsole () 
     {
+        List<Connections> connections = new ArrayList<Connections>();
         Scanner scanner = new Scanner(System.in);
-        ArrayList<ArrayList<String>> input = new ArrayList<ArrayList<String>>();
         boolean inputEnd = false;
         boolean deleteCheck = false;
-        while (deleteCheck == false)
+        while (!deleteCheck)
         {     
-            while (inputEnd == false)
+            while (!inputEnd)
             {
                 for (int i=0;i<i+1;i++)
                 {
                     System.out.println("Input connection first, then weight: ");
-                    input.add(new ArrayList<String>());
-                    input.get(i).add(scanner.nextLine());
-                    input.get(i).add(scanner.nextLine());                     
+                    String cn = scanner.nextLine();
+                    int wg = Integer.parseInt(scanner.nextLine());
+                    char ch1 = getCharFromString(cn, 0);
+                    char ch2 = getCharFromString(cn, 1);
+                    Connections connection = new Connections(cn, ch1, ch2, wg);
+                    connections.add(connection);                    
                     System.out.println("Continue to input?(y/n): ");
                     if (scanner.nextLine().equals("n"))
                     {
@@ -33,20 +40,22 @@ public class Input {
                         break;
                     }
                 }
+                for (int j=0;j<connections.size();j++){
+                    connections.get(j).displayInfo();
+                }
             }
-        
+                
             System.out.println("Do you want to delete connections?(y/n): ");
             if(scanner.nextLine().equals("y"))
             {
-                input.clear();
+                connections.clear();
                 inputEnd = false;
             }
             else
             {
             deleteCheck = true;
             }
-        }
-        Sorting.NumSorting(input);   
+        } 
     }
 
     private static File choseTextFile() 
@@ -60,23 +69,26 @@ public class Input {
     
     public static void InputFromFile() throws FileNotFoundException
     {
-        ArrayList<ArrayList<String>> input = new ArrayList<ArrayList<String>>();
-        Scanner sc = new Scanner(choseTextFile());
-        int i = 0;
-                   
+        List<Connections> connections = new ArrayList<Connections>();
+        Scanner sc = new Scanner(choseTextFile());             
         while (sc.hasNextLine()) 
         {
             String[] line = sc.nextLine().trim().split(" ");
-            input.add(new ArrayList<String>());
-            input.get(i).add(line[0]);
-            input.get(i).add(line[1]); 
-            i++;
+            String cn = line[0];
+            int wg = Integer.parseInt(line[1]);
+            char ch1 = getCharFromString(cn, 0);
+            char ch2 = getCharFromString(cn, 1);
+            Connections connection = new Connections(cn, ch1, ch2, wg);
+            connections.add(connection);                    
             if (sc.hasNext() == false){               
                 sc.close();
                 break;
             }
         }
         sc.close();
-        Sorting.NumSorting(input);      
-    }   
+        for (int j=0;j<connections.size();j++){
+            connections.get(j).displayInfo();
+        }
+    }
 }
+
