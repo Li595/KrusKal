@@ -1,12 +1,19 @@
 package com.mycompany.spanningtree;
 
-import java.util.ArrayList;
-import java.util.SortedSet;
-import java.util.TreeSet;
+import java.util.*;
 
 public class Sorting {
     
-    public static void NumSorting (ArrayList<ArrayList<String>> input) {
+    public TreeSet ascendingWeight(List<Connections> object){
+        TreeSet<Connections> ascendedConnections = new TreeSet<Connections>();
+        ascendedConnections.addAll(object);
+        for (Connections temp: ascendedConnections){
+            System.out.println("Points: " + temp.getStartPoint() + "," + temp.getEndPoint() + " Weight: " + temp.getWeight());
+        }
+        return ascendedConnections;
+    }
+    
+    public void NumSorting (ArrayList<ArrayList<String>> input) {
         
         SortedSet<Integer> set = new TreeSet<>();
         ArrayList<Integer> list_num = new ArrayList<Integer>();
@@ -43,3 +50,4 @@ public class Sorting {
         return min_con;
     }   
 }
+
