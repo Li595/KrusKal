@@ -1,21 +1,38 @@
-
 package com.mycompany.spanningtree;
 
-
-public class Connections {
-    String connection;
-    char startPoint;
-    char endPoint;
-    int weight;
+public class Connections implements Comparable<Connections> {
+    private char startPoint;
+    private char endPoint;
+    private int weight;
     
-    Connections(String c, char s, char e, int w){
-        this.connection = c;
-        this.startPoint = s;
-        this.endPoint = e;
-        this.weight = w;
+    Connections(char startPoint, char endPoint, int weight){
+        this.startPoint = startPoint;
+        this.endPoint = endPoint;
+        this.weight = weight;
+    }
+    
+    public Character getStartPoint(){
+        return startPoint;
+    }
+    
+    public Character getEndPoint(){
+        return endPoint;
+    }
+    
+    public int getWeight(){
+        return weight;
+    }
+    
+    public int compareTo(Connections compareConnection){
+        int compareWeight = ((Connections) compareConnection).getWeight();
+        if (this.weight == compareWeight){
+            return this.weight;
+        }else{
+        return this.weight - compareWeight;
+        }
     }
     
     void displayInfo(){
-        System.out.printf("Connection: %s Points: %c, %c Weight: %d\n", connection, startPoint, endPoint, weight);
+        System.out.printf("Points: %c, %c Weight: %d\n", startPoint, endPoint, weight);
     }    
 }
