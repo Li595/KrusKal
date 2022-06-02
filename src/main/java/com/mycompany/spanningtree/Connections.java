@@ -1,6 +1,6 @@
 package com.mycompany.spanningtree;
 
-public class Connections implements Comparable<Connections> {
+public class Connections implements Addable{
     private char startPoint;
     private char endPoint;
     private int weight;
@@ -23,16 +23,10 @@ public class Connections implements Comparable<Connections> {
         return weight;
     }
     
-    public int compareTo(Connections compareConnection){
-        int compareWeight = ((Connections) compareConnection).getWeight();
-        if (this.weight == compareWeight){
-            return this.weight;
-        }else{
-        return this.weight - compareWeight;
-        }
+    public void add(){
     }
-    
-    void displayInfo(){
-        System.out.printf("Points: %c, %c Weight: %d\n", startPoint, endPoint, weight);
-    }    
 }
+
+interface Addable{
+    void add();       
+    }
