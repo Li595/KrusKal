@@ -4,7 +4,7 @@ import java.io.FileNotFoundException;
 import java.util.*;
 
 public class SpanningTree {
-        
+     
     public static void main(String[] args){
         List<Connections> connectionsList = new ArrayList<Connections>();
         
@@ -12,17 +12,15 @@ public class SpanningTree {
         System.out.println("How do you want to input?(text/file): ");
         if(scanner.nextLine().equals("text"))
         {
-            //TODO соединить получаемый лист с консольным вводом
             ConsoleInput connections = new ConsoleInput();
-            connections.InputFromConsole();
+            connectionsList = connections.inputFromConsole();
         }
         else
         {
             try
             {
                 FileInput connections = new FileInput();
-                connectionsList = connections.InputFromFile();
-                //connections.InputFromFile();
+                connectionsList = connections.inputFromFile();
             }
             catch(FileNotFoundException e)
             {
@@ -31,14 +29,21 @@ public class SpanningTree {
                 if(scanner.nextLine().equals("y"))
                 {
                     ConsoleInput connections = new ConsoleInput();
-                    connections.InputFromConsole();
+                    connectionsList = connections.inputFromConsole();
                 }
             }
             finally{
                 scanner.close();
             }
         }
+        
         Sorting ascendedConnections = new Sorting();
-        ascendedConnections.ascendingWeight(connectionsList);                         
+        connectionsList.sort(ascendedConnections);
+        for (Connections temp: connectionsList){
+            System.out.println("Points: " + temp.getStartPoint() + "," + temp.getEndPoint() + " Weight: " + temp.getWeight());
+        }
+        
+        Kruskal run = new Kruskal();
+        run.algorithm(connectionsList);
     }
 }
