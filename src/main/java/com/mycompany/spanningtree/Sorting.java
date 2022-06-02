@@ -2,52 +2,16 @@ package com.mycompany.spanningtree;
 
 import java.util.*;
 
-public class Sorting {
+public class Sorting implements Comparator<Connections> {
     
-    public TreeSet ascendingWeight(List<Connections> object){
-        TreeSet<Connections> ascendedConnections = new TreeSet<Connections>();
-        ascendedConnections.addAll(object);
-        for (Connections temp: ascendedConnections){
-            System.out.println("Points: " + temp.getStartPoint() + "," + temp.getEndPoint() + " Weight: " + temp.getWeight());
+    public int compare(Connections weight1,Connections weight2){
+        if (weight1.getWeight() == weight2.getWeight()){
+            return 0;
         }
-        return ascendedConnections;
-    }
-    
-    public void NumSorting (ArrayList<ArrayList<String>> input) {
-        
-        SortedSet<Integer> set = new TreeSet<>();
-        ArrayList<Integer> list_num = new ArrayList<Integer>();
-        String bigstr = "";
-        for (int i=0;i<input.size();i++)
-        {
-            for (int j=1;j<input.get(i).size();j++)
-            {
-            bigstr = input.get(i).get(j);
-            int number = Integer.parseInt(bigstr);
-            set.add(number);
-            }
-        }
-        list_num.addAll(set);
-        MinConnectionList(input,list_num);
-        
-    }
-
-    public static ArrayList<String> MinConnectionList(ArrayList<ArrayList<String>> input, ArrayList<Integer> list_num){
-        ArrayList<String> min_con = new ArrayList<String>();
-        for (int i=0; i<list_num.size();i++)
-        {
-            int num_1 = list_num.get(i);
-        
-            for(int j=0;j<input.size();j++)
-            {
-                if (Integer.toString(num_1).equals(input.get(j).get(1)))
-                {
-                min_con.add(input.get(j).get(0));
-                }
-            }
-        }
-        KrusKal.AddMinConnection(min_con,input);
-        return min_con;
-    }   
+        if (weight1.getWeight() > weight2.getWeight()){
+            return 1;
+        }else{
+            return -1;
+        }     
+    }  
 }
-
