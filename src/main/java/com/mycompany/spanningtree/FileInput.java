@@ -1,4 +1,3 @@
-
 package com.mycompany.spanningtree;
 
 import java.awt.FileDialog;
@@ -7,12 +6,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
 
-public class FileInput {
-    
-    public static char getCharFromString(String str, int index)
-    {
-        return str.charAt(index);
-    }
+public class FileInput extends Input {
     
     private static File choseTextFile() 
     {
@@ -23,9 +17,9 @@ public class FileInput {
         return file[0];
     }
     
-    public List InputFromFile() throws FileNotFoundException
+    public List inputFromFile() throws FileNotFoundException
     {
-        List<Connections> connections = new ArrayList<Connections>();
+        List<Addable> connections = new ArrayList<Addable>();
         Scanner sc = new Scanner(choseTextFile());             
         while (sc.hasNextLine()) 
         {
@@ -34,17 +28,9 @@ public class FileInput {
             int wg = Integer.parseInt(line[1]);
             char ch1 = getCharFromString(cn, 0);
             char ch2 = getCharFromString(cn, 1);
-            Connections connection = new Connections(ch1, ch2, wg);
+            Addable connection = new Connections(ch1, ch2, wg);
             connections.add(connection);                    
-            if (sc.hasNext() == false){               
-                sc.close();
-                break;
-            }
         }
-        sc.close();
-        TreeSet<Connections> ascendedConnections = new TreeSet<Connections>();
-        ascendedConnections.addAll(connections);
         return connections;
-    }
-    
+    }  
 }
