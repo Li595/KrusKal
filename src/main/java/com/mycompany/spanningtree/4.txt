@@ -1,8 +1,0 @@
-AB 7
-AD 4
-DB 9
-BC 5
-DC 7
-DG 10
-CG 13
-GJ 11
