@@ -16,16 +16,21 @@ public class Kruskal {
         for(int i=0;i<points.size();i++){
             //Проверка на существование более, чем одного множества
             //И отсечение множества если оно крайнее
-            if(points.size()>1 && i+1<points.size()){
-               for(int j=0;j<points.get(i).size();j++){
-                   //Проверка на содержание в следующем множестве элементов текущего
-                   //Запись значений и удаление множества
-                    if(points.get(i+1).contains(points.get(i).get(j))){
-                        points.get(i).addAll(points.get(i+1));
-                        points.remove(i+1);
-                        break;
+            if(points.size()>1 && i!=points.size()-1){
+                //Дополнительный цикл для сравнение элементов не только в следующем множестве, но и во всех остальных
+                for (int k=i+1;k<points.size();k++) {
+                    for (int j = 0; j < points.get(i).size(); j++) {
+                        //Проверка на содержание в множестве элементов текущего
+                        //Запись значений и удаление множества
+                        if (points.get(k).contains(points.get(i).get(j))) {
+                            points.get(i).addAll(points.get(k));
+                            points.remove(k);
+                        }
+                        //Если при удалении множества оно является последним, то цикл прекращается
+                        if (k==points.size())
+                            break;
                     }
-                } 
+                }
             } 
         }
     }
@@ -48,13 +53,11 @@ public class Kruskal {
                     if (points.get(j).contains(Character.toString(connectionsList.get(i).getStartPoint())) || points.get(j).contains(Character.toString(connectionsList.get(i).getEndPoint()))){
                         points.get(j).add(Character.toString(connectionsList.get(i).getStartPoint()));
                         points.get(j).add(Character.toString(connectionsList.get(i).getEndPoint()));
-                        break;
                     }else{
                         List<String> listTemp = new ArrayList<>();
                         listTemp.add(Character.toString(connectionsList.get(i).getStartPoint()));
                         listTemp.add(Character.toString(connectionsList.get(i).getEndPoint()));
                         points.add((ArrayList<String>) listTemp);
-                        break;
                     }
                 }
                 existingArrayCheck(points);
