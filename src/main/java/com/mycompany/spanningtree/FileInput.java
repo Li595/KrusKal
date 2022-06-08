@@ -8,12 +8,13 @@ import java.util.*;
 
 public class FileInput extends Input {
     
-    private static File choseTextFile() 
+    private File choseTextFile()
     {
         FileDialog dialog = new FileDialog((Frame) null, "Select File To Open");
         dialog.setMode(FileDialog.LOAD);
         dialog.setVisible(true);
         File[] file = dialog.getFiles();
+        dialog.dispose();
         return file[0];
     }
     
