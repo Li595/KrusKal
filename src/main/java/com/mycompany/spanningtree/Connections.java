@@ -22,7 +22,4 @@ public class Connections{
     public int getWeight(){
         return weight;
     }
-    
-    public void add(){
-    }
 }
